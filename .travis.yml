@@ -6,7 +6,16 @@ matrix:
     env: TOX_ENV=pep8
   - python: 3.6
     env: TOX_ENV=py36
+  - python: 3.6
+    env: TOX_ENV=docs
 install:
 - pip install tox
 script:
 - tox -e $TOX_ENV
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: doc/build/html/
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: master
